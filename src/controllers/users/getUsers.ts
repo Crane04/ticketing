@@ -1,5 +1,5 @@
 import express from "express";
-import { getUsers } from "../../db/users";
+import getUsers from "../../services/users/getUsers.services";
 import { SuccessResponse } from "../../helpers/responseHandler";
 
 // add some validate admin middleware later

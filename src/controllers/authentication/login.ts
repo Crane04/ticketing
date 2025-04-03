@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, getUserByEmail } from "../../db/users";
+import getUserByEmail from "../../services/users/getUserByEmail";
 import { authentication, random } from "../../helpers";
 import { SuccessResponse, ErrorResponse } from "../../helpers/responseHandler";
 const SECRET = process.env.SECRET;

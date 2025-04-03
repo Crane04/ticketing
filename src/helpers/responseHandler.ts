@@ -1,5 +1,9 @@
 import express from "express";
 
+type ValidationError = {
+  field: string;
+  message: string;
+};
 export const SuccessResponse = (
   res: express.Response,
   message: string,
@@ -9,6 +13,18 @@ export const SuccessResponse = (
     message,
     data,
     status: "success",
+  });
+};
+
+export const ValidatorErrorResponse = (
+  res: express.Response,
+  message: string,
+  error: Array<ValidationError> | string
+) => {
+  return res.status(422).json({
+    message,
+    error,
+    status: "error",
   });
 };
 

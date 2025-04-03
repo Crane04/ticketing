@@ -1,7 +1,8 @@
 import express from "express";
 import { get, merge } from "lodash";
 
-import { getUserBySessionToken } from "../db/users";
+// import { getUserBySessionToken } from "../db/users";
+import getUserBySessionToken from "../services/users/getUserBySessionToken";
 import { ErrorResponse } from "../helpers/responseHandler";
 
 export const validateUser = async (
@@ -24,7 +25,7 @@ export const validateUser = async (
       return;
     }
     merge(req, { identity: user });
-    
+
     next();
   } catch (error) {
     console.error(error);

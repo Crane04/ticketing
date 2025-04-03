@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-type User = {
+export type User = {
   username: string;
   email: string;
   authentication: {
@@ -9,6 +9,7 @@ type User = {
     sessionToken?: string;
   };
 };
+
 
 const UserSchema = new mongoose.Schema<User>({
   username: {
@@ -30,24 +31,6 @@ const UserSchema = new mongoose.Schema<User>({
 
 export const UserModel = mongoose.model("User", UserSchema);
 
-export const getUsers = () => {
-  // add pagination and advanced sorting later
-  return UserModel.find();
-};
-export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserBySessionToken = (sessionToken: string) =>
-  UserModel.findOne({ "authentication.sessionToken": sessionToken });
 
-export const getUserById = (id: string) => UserModel.findById(id);
 
-export const createUser = (values: User) => {
-  return new UserModel(values).save().then((user) => user.toObject());
-};
 
-export const deleteUser = (id: string) => {
-  UserModel.findOneAndDelete({ _id: id });
-};
-
-export const updateUserById = (id: string, values: Record<string, any>) => {
-  UserModel.findByIdAndUpdate(id, values, { new: true });
-};
