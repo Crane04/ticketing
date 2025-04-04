@@ -1,9 +1,10 @@
 import express from "express";
 import controllers from "../controllers/index";
 import { validateUser } from "../middlewares/validateUser";
-const { getAllUsers, getUser } = controllers;
+import AuthController from "controllers/users";
 
 export default (router: express.Router) => {
-  router.get("/users/all", validateUser, getAllUsers);
-  router.get("/users/get-one", validateUser, getUser);
+  router.get("/users/retrieve", validateUser, AuthController.getUser);
+  router.post("/users/register", AuthController.register);
+  router.post("/users/login", AuthController.login);
 };

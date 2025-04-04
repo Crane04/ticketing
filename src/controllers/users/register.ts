@@ -2,7 +2,7 @@ import express from "express";
 import createUser from "../../services/users/createUser";
 import getUserByEmail from "../../services/users/getUserByEmail";
 import { authentication, random } from "../../helpers";
-import { SuccessResponse, ErrorResponse } from "../../helpers/responseHandler";
+import { SuccessResponse, ErrorResponse } from "../../helpers/ApiResponse";
 
 const register = async (req: express.Request, res: express.Response) => {
   try {
@@ -17,6 +17,7 @@ const register = async (req: express.Request, res: express.Response) => {
       return;
     }
 
+    
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {

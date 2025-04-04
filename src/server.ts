@@ -1,9 +1,11 @@
+require("express-async-errors")
 import express from "express";
 import http from "http";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import routes from "./router/index";
+
 
 require("dotenv").config();
 const app = express();

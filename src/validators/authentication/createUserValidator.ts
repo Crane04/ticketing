@@ -1,6 +1,7 @@
 import express from "express";
-import { ValidatorErrorResponse } from "../../helpers/responseHandler";
+import ApiResponse from "../../helpers/ApiResponse";
 import Validator from "fastest-validator";
+import getUserByEmail from "../../services/users/getUserByEmail";
 
 const schema = {
   username: {
@@ -30,27 +31,25 @@ const createUserValidator = async (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  try {
-    const result = await v.validate(req.body, schema);
+  const result = await v.validate(req.body, schema);
 
-    if (result !== true) {
-      const errors = result.map((err) => ({
-        field: err.field || "unknown",
-        message: err.message,
-      }));
-      ValidatorErrorResponse(res, "Validation failed", errors);
-      return;
-    }
-
-    next();
-  } catch (error) {
-    ValidatorErrorResponse(
-      res,
-      "Validation error",
-      "An unexpected error occurred"
-    );
+  if (result !== true) {
+    const errors = result.map((err) => ({
+      field: err.field || "unknown",
+      message: err.message,
+    }));
+    ApiResponse.validationError(res, "Validation failed", errors);
     return;
   }
+  const { email } = req.body;
+
+  const userExists = await getUserByEmail(email);
+  if (userExists) {
+    ApiResponse.error(res, "User with this email already exists", 400);
+    return;
+  }
+
+  next();
 };
 
 export default createUserValidator;

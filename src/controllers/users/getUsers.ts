@@ -1,6 +1,6 @@
 import express from "express";
 import getUsers from "../../services/users/getUsers.services";
-import { SuccessResponse } from "../../helpers/responseHandler";
+import { SuccessResponse } from "../../helpers/ApiResponse";
 
 // add some validate admin middleware later
 const getAllUsers = async (req: express.Request, res: express.Response) => {

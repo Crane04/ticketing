@@ -1,7 +1,7 @@
 import express from "express";
 import getUserByEmail from "../../services/users/getUserByEmail";
 import { authentication, random } from "../../helpers";
-import { SuccessResponse, ErrorResponse } from "../../helpers/responseHandler";
+import { SuccessResponse, ErrorResponse } from "../../helpers/ApiResponse";
 const SECRET = process.env.SECRET;
 
 const login = async (req: express.Request, res: express.Response) => {
