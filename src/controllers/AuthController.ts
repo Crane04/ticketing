@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import ApiResponse from "../../helpers/ApiResponse";
+import ApiResponse from "../helpers/ApiResponse";
 import CreateUser from "services/users/createUser";
-import LoginUser from "../../services/users/loginUser";
+import LoginUser from "../services/users/loginUser";
 import { isBoolean } from "lodash";
 import { get } from "lodash";
 
